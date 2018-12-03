@@ -127,49 +127,72 @@ function draw() {
     //basics
     //tela de vitória
     //contador de animais que não foram salvos
-    if (jaulax[0] < 0 || jaulax[1] < 0 || jaulax[2] < 0 || jaulax[3] < 0) {
+    if ((jaulax[0] < 0 || jaulax[1] < 0 || jaulax[2] < 0 || jaulax[3] < 0)) {
         ans++;
+    }
+    if(ans>=7){
+        if(sommico.isPlaying()){
+			sommico.pause();
+		}
+		if(ambientebaleia.isPlaying()){
+			ambientebaleia.pause();
+		}
+		if(ambientetartaruga.isPlaying()){
+			ambientetartaruga.pause();
+		}
+		if(sombaleia.isPlaying()){
+			sombaleia.pause();
+		}
+		if(somarara.isPlaying()){
+			somarara.pause();
+		}
+		if(final.isPlaying()){
+			final.pause();
+        }
+        ans=0;
+        tela = 30;
+        musica = 0;
     }
     //colisao do tiro com o inimigo
     //tiro1
-    if (dist(tirox[0], tiroy[0], xe[0], ye[0]) < (30)) {
+    if (dist(tirox[0], tiroy[0], xe[0], ye[0]) < (30) && jaulax[0] < width) {
         jaulax[0] = 1000000000;
         tirox[0] = 11000;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[0], tiroy[0], xe[1], ye[1]) < (30)) {
+    if (dist(tirox[0], tiroy[0], xe[1], ye[1]) < (30) && jaulax[1] < width) {
         jaulax[1] = 1000000000;
         tirox[0] = 11000;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[0], tiroy[0], xe[2], ye[2]) < (30)) {
+    if (dist(tirox[0], tiroy[0], xe[2], ye[2]) < (30) && jaulax[2] < width) {
         jaulax[2] = 1000000000;
         tirox[0] = 11000;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[0], tiroy[0], xe[3], ye[3]) < (30)) {
+    if (dist(tirox[0], tiroy[0], xe[3], ye[3]) < (30) && jaulax[3] < width) {
         jaulax[3] = 1000000000;
         tirox[0] = 11000;
         pontuacao = pontuacao + 10;
     }
 
     //tiro2
-    if (dist(tirox[1], tiroy[1], xe[0], ye[0]) < (30)) {
+    if (dist(tirox[1], tiroy[1], xe[0], ye[0]) < (30) && jaulax[0] < width) {
         jaulax[0] = 1000000000;
         tirox[1] = 11080;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[1], tiroy[1], xe[1], ye[1]) < (30)) {
+    if (dist(tirox[1], tiroy[1], xe[1], ye[1]) < (30) && jaulax[1] < width) {
         jaulax[1] = 1000000000;
         tirox[1] = 11080;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[1], tiroy[1], xe[2], ye[2]) < (30)) {
+    if (dist(tirox[1], tiroy[1], xe[2], ye[2]) < (30) && jaulax[2] < width) {
         jaulax[2] = 1000000000;
         tirox[1] = 11080;
         pontuacao = pontuacao + 10;
     }
-    if (dist(tirox[1], tiroy[1], xe[3], ye[3]) < (30)) {
+    if (dist(tirox[1], tiroy[1], xe[3], ye[3]) < (30) && jaulax[3] < width) {
         jaulax[3] = 1000000000;
         tirox[1] = 11080;
         pontuacao = pontuacao + 10;
@@ -217,17 +240,15 @@ function draw() {
         textSize(30); //muda só o tamanho do texto
         text("Aperte ENTER", 350, 300);
         if (keyIsDown(ENTER)) { //detecta se a tecla ENTER foi pressionada, se sim, vai pra tela 2 do jogo
-            tela = 2;
-            
+            tela = 2;   
         }
-
     }
 
     if (tela == 2) {
         background(TelaInicial);
         textFont(font2, 40);
-        text("Olá, jogador. Eu sou o Jõao Verde, será que você pode me ajudar a ", 50, 200);
-        text("aprender mais sobre os animais brasileiros em grande risco de extinção?", 50, 250);
+        text("Oi, jogador(a). Eu sou o Jõao Verde, poderia me ajudar a ", 50, 200);
+        text("aprender mais sobre os animais brasileiros em grande risco de extincao?", 50, 250);
         text("Aperte a seta para direita para continuar...", 600, 450);
         if (keyIsDown(RIGHT_ARROW)) { //detecta se a tecla ENTER foi pressionada, se sim, vai pra tela 2 do jogo
             tela = 3;
@@ -236,8 +257,11 @@ function draw() {
     if (tela == 3) {
         background(TelaInicial);
         textFont(font2, 40);
-        text("As regras são simples: ", 520, 100);
-        text("A cada nível, precisaremos retirar uma quantidade de animais de certa espécie da jaula.", 50, 250);
+        text("As regras são simples: ", 420, 50);
+        text("A cada nivel, precisaremos retirar uma quantidade de animais de certa espécie da jaula.", 50, 140);
+        text("Movimente-se com as direcionais e solte uma chave para tirar os animais", 50, 170);
+        text("da jaula com a tecla SPACE", 50, 200);
+        text("Nao deixe de salvar mais que 7 animais!", 50, 330);
         text("Aperte ENTER para continuar...", 720, 450);
         if (keyIsDown(ENTER)) { //detecta se a tecla ENTER foi pressionada, se sim, vai pra tela 2 do jogo
             tela = 4;
@@ -253,24 +277,7 @@ function draw() {
 			somarara.play();
 			musica=1;
 		}
-		if(ans>4){
-			if(sommico.isPlaying()){
-				sommico.pause();
-			}
-			if(ambientebaleia.isPlaying()){
-				ambientebaleia.pause();
-			}
-			if(ambientetartaruga.isPlaying()){
-				ambientetartaruga.pause();
-			}
-			if(sombaleia.isPlaying()){
-				sombaleia.pause();
-			}
-			if(somarara.isPlaying()){
-				somarara.pause();
-			}
-			tela=30;
-		}
+		
         if (xe[0] < 0) {
             xe[0] = 1080 + parseInt(random(0, 2000));
             ye[0] = parseInt(random(40, 420));
@@ -380,7 +387,6 @@ function draw() {
         text("Aperte a seta para a direita para avançar até a próxima fase", 550, 460);
         if (keyIsDown(RIGHT_ARROW)) {
             tela = 5;
-            ans=0;
             somarara.setVolume(0);
             musica = 0;
 
@@ -391,24 +397,6 @@ function draw() {
 			ambientebaleia.play();
 			sombaleia.play();
 			musica=1;
-		}
-		if(ans>6){
-			if(sommico.isPlaying()){
-				sommico.pause();
-			}
-			if(ambientebaleia.isPlaying()){
-				ambientebaleia.pause();
-			}
-			if(ambientetartaruga.isPlaying()){
-				ambientetartaruga.pause();
-			}
-			if(sombaleia.isPlaying()){
-				sombaleia.pause();
-			}
-			if(somarara.isPlaying()){
-				somarara.pause();
-			}
-			tela=30;
 		}
         if (xe[0] < 0) {
             xe[0] = 1080 + parseInt(random(0, 2000));
@@ -518,7 +506,6 @@ function draw() {
         text("Aperte a seta para a direita para avançar até a próxima fase", 500, 480);
         if (keyIsDown(RIGHT_ARROW)) {
             tela = 6;
-            ans=0;
             ambientebaleia.pause();
             sombaleia.pause();
 			musica=0;
@@ -530,24 +517,6 @@ function draw() {
 		if(musica==0){
 			ambientetartaruga.play();
 			musica=1;
-		}
-		if(ans>7){
-			if(sommico.isPlaying()){
-				sommico.pause();
-			}
-			if(ambientebaleia.isPlaying()){
-				ambientebaleia.pause();
-			}
-			if(ambientetartaruga.isPlaying()){
-				ambientetartaruga.pause();
-			}
-			if(sombaleia.isPlaying()){
-				sombaleia.pause();
-			}
-			if(somarara.isPlaying()){
-				somarara.pause();
-			}
-			tela=30;
 		}
         if (xe[0] < 0) {
             xe[0] = 1080 + parseInt(random(0, 2000));
@@ -651,7 +620,6 @@ function draw() {
         text("Aperte a seta para a direita para avançar até a próxima fase", 500, 480);
         if (keyIsDown(RIGHT_ARROW)) {
             tela = 7;
-            ans=0;
             musica=0;
             ambientetartaruga.pause();
         }
@@ -660,27 +628,6 @@ function draw() {
 		if(musica==0){
 			sommico.play();
 			musica=1;
-		}
-		if(ans>8){
-			if(sommico.isPlaying()){
-				sommico.pause();
-			}
-			if(ambientebaleia.isPlaying()){
-				ambientebaleia.pause();
-			}
-			if(ambientetartaruga.isPlaying()){
-				ambientetartaruga.pause();
-			}
-			if(sombaleia.isPlaying()){
-				sombaleia.pause();
-			}
-			if(somarara.isPlaying()){
-				somarara.pause();
-			}
-			if(final.isPlaying()){
-				final.pause();
-			}
-			tela=30;
 		}
         if (xe[0] < 0) {
             xe[0] = 1080 + parseInt(random(0, 2000));
@@ -784,7 +731,6 @@ function draw() {
         text("Aperte a seta para a direita para avançar até a próxima fase", 500, 480);
         if (keyIsDown(RIGHT_ARROW)) {
             tela = 8;
-            ans=0;
             musica=0;
             sommico.pause();
         }
@@ -796,27 +742,6 @@ function draw() {
 		}
 		if(!final.isPlaying()){
 			final.play();
-		}
-		if(ans>9){
-			if(sommico.isPlaying()){
-				sommico.pause();
-			}
-			if(ambientebaleia.isPlaying()){
-				ambientebaleia.pause();
-			}
-			if(ambientetartaruga.isPlaying()){
-				ambientetartaruga.pause();
-			}
-			if(sombaleia.isPlaying()){
-				sombaleia.pause();
-			}
-			if(somarara.isPlaying()){
-				somarara.pause();
-			}
-			if(final.isPlaying()){
-				final.pause();
-			}
-			tela=30;
 		}
         if (xe[0] < 0) {
             xe[0] = 1080 + parseInt(random(0, 2000));
@@ -944,6 +869,9 @@ function draw() {
         musica=0;
     }
     if (tela == 30) {
+        vida = 3;
+        pontuacao = 0;
+        ans = 0;
 		if(musica==0){
 			gameover.play();
 			musica=1;
@@ -954,12 +882,9 @@ function draw() {
         text("Game over", 150, 220); // alert o texto com suas coordenadas
         textSize(18); //muda só o tamanho do texto
         text("Aperte CTRL para voltar a tela inicial", 350, 270);
-        vida = 3;
-        pontuacao = 0;
-        ans = 0;
         if (keyIsDown(CONTROL)) {
-            tela = 1;
             gameover.pause();
+            tela = 1;
         }
     }
     if (pontuacao >= 1200) {
@@ -985,13 +910,3 @@ function draw() {
         }
     }
 } //draw
-
-
-/*
-- Música para cada cenário
-- Aumentar a quantidade de animais
-- Objeto pra ganhar vida extra
-
-
-- Colocar um contador de animais que não foram salvos
-*/
